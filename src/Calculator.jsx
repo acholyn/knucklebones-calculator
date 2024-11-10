@@ -48,16 +48,39 @@ export default function Calculator() {
 		setTotal(totalScore);
 	};
 
+	const getTextColor = (index) => {
+		const colIndex = index % 3;
+		const columnValues = [
+			grid[colIndex],
+			grid[colIndex + 3],
+			grid[colIndex + 6],
+		].map(Number);
+		const currentValue = Number(grid[index]);
+
+		if (isNaN(currentValue) || currentValue === 0) return "white";
+
+		const matchCount = columnValues.filter((v) => v === currentValue).length;
+
+		if (matchCount === 3) return "#90EE90"; //  green
+		if (matchCount === 2) return "#ffe500"; //  yellow
+		return "white";
+	};
+
 	return (
 		<div className="kb-calculator__wrapper">
 			<Grid container spacing={2} className="kb-calculator">
 				{grid.map((value, index) => (
-					<Grid xs={4} key={index}>
+					<Grid xs={6} key={index}>
 						<TextField
-							fullWidth
+							size="large"
 							value={value}
 							onChange={(e) => handleInputChange(index, e.target.value)}
 							type="number"
+							sx={{
+								"& .MuiInputBase-input": {
+									color: getTextColor(index),
+								},
+							}}
 						/>
 					</Grid>
 				))}

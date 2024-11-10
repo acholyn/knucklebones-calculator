@@ -5,6 +5,7 @@
 .app-wrapper {
 	display: grid;
 	justify-items: center;
+	margin-bottom: 4rem;
 }
 
 .kb-calculator__wrapper {
