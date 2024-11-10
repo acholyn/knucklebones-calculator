@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { Grid2 as Grid, TextField, Button, Typography } from "@mui/material";
+import { Refresh } from "@mui/icons-material";
 import "./App.css";
 
 export default function Calculator() {
@@ -108,6 +109,7 @@ export default function Calculator() {
 				className="kb-calculator__button"
 				color="secondary"
 				size="small"
+				startIcon={<Refresh />}
 			>
 				Reset
 			</Button>
