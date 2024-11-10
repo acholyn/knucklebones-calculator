@@ -14,25 +14,36 @@ export default function Calculator() {
 		setGrid(newGrid);
 	};
 	const handleKeyDown = (event, index) => {
-		switch (event.key) {
-			case "ArrowUp":
-				event.preventDefault();
-				if (index >= 3) inputRefs.current[index - 3].focus();
-				break;
-			case "ArrowDown":
-				event.preventDefault();
-				if (index < 6) inputRefs.current[index + 3].focus();
-				break;
-			case "ArrowLeft":
-				event.preventDefault();
-				if (index % 3 !== 0) inputRefs.current[index - 1].focus();
-				break;
-			case "ArrowRight":
-				event.preventDefault();
-				if (index % 3 !== 2) inputRefs.current[index + 1].focus();
-				break;
-			default:
-				break;
+		if (["1", "2", "3", "4", "5", "6"].includes(event.key)) {
+			event.preventDefault();
+			handleInputChange(index, event.key);
+		} else {
+			switch (event.key) {
+				case "ArrowUp":
+					event.preventDefault();
+					if (index >= 3) inputRefs.current[index - 3].focus();
+					break;
+				case "ArrowDown":
+					event.preventDefault();
+					if (index < 6) inputRefs.current[index + 3].focus();
+					break;
+				case "ArrowLeft":
+					event.preventDefault();
+					if (index % 3 !== 0) inputRefs.current[index - 1].focus();
+					break;
+				case "ArrowRight":
+					event.preventDefault();
+					if (index % 3 !== 2) inputRefs.current[index + 1].focus();
+					break;
+				case "Backspace":
+				case "Delete":
+					event.preventDefault();
+					handleInputChange(index, "");
+					break;
+				default:
+					event.preventDefault();
+					break;
+			}
 		}
 	};
 
