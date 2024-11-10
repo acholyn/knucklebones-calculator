@@ -13,6 +13,7 @@ export default function Calculator() {
 		const newGrid = [...grid];
 		newGrid[index] = value;
 		setGrid(newGrid);
+		calculateScores();
 	};
 	const handleKeyDown = (event, index) => {
 		if (["1", "2", "3", "4", "5", "6"].includes(event.key)) {
@@ -35,6 +36,10 @@ export default function Calculator() {
 				case "ArrowRight":
 					event.preventDefault();
 					if (index % 3 !== 2) inputRefs.current[index + 1].focus();
+					break;
+				case "Enter":
+					event.preventDefault();
+					calculateScores();
 					break;
 				case "Backspace":
 				case "Delete":
