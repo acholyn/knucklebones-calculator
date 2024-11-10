@@ -24,7 +24,7 @@ export default function Calculator() {
 
 			// Count occurrences of each number in the column
 			columnValues.forEach((value) => {
-				if (value !== 0) {
+				if (value !== 0 && !isNaN(value)) {
 					// Ignore empty cells (0 or NaN)
 					valueCounts[value] = (valueCounts[value] || 0) + 1;
 				}
@@ -34,7 +34,9 @@ export default function Calculator() {
 			let columnScore = 0;
 			for (const [value, count] of Object.entries(valueCounts)) {
 				if (count > 1) {
-					columnScore += value * count * count;
+					columnScore += Number(value) * count * count;
+				} else {
+					columnScore += Number(value); // Add single occurrences
 				}
 			}
 
