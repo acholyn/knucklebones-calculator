@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Grid2 as Grid, TextField, Button, Typography } from "@mui/material";
 import "./App.css";
 
@@ -6,11 +6,34 @@ export default function Calculator() {
 	const [grid, setGrid] = useState(Array(9).fill(""));
 	const [scores, setScores] = useState([0, 0, 0]);
 	const [total, setTotal] = useState(0);
+	const inputRefs = useRef(Array(9).fill(null));
 
 	const handleInputChange = (index, value) => {
 		const newGrid = [...grid];
 		newGrid[index] = value;
 		setGrid(newGrid);
+	};
+	const handleKeyDown = (event, index) => {
+		switch (event.key) {
+			case "ArrowUp":
+				event.preventDefault();
+				if (index >= 3) inputRefs.current[index - 3].focus();
+				break;
+			case "ArrowDown":
+				event.preventDefault();
+				if (index < 6) inputRefs.current[index + 3].focus();
+				break;
+			case "ArrowLeft":
+				event.preventDefault();
+				if (index % 3 !== 0) inputRefs.current[index - 1].focus();
+				break;
+			case "ArrowRight":
+				event.preventDefault();
+				if (index % 3 !== 2) inputRefs.current[index + 1].focus();
+				break;
+			default:
+				break;
+		}
 	};
 
 	const calculateScores = () => {
@@ -68,13 +91,24 @@ export default function Calculator() {
 
 	return (
 		<div className="kb-calculator__wrapper">
+			<Button
+				onClick={() => setGrid(Array(9).fill(""))}
+				variant="outlined"
+				className="kb-calculator__button"
+				color="secondary"
+				size="small"
+			>
+				Reset
+			</Button>
 			<Grid container spacing={2} className="kb-calculator">
 				{grid.map((value, index) => (
-					<Grid xs={6} key={index}>
+					<Grid xs={4} key={index}>
 						<TextField
 							size="large"
 							value={value}
 							onChange={(e) => handleInputChange(index, e.target.value)}
+							onKeyDown={(e) => handleKeyDown(e, index)}
+							inputRef={(el) => (inputRefs.current[index] = el)}
 							type="number"
 							sx={{
 								"& .MuiInputBase-input": {
