@@ -21,10 +21,10 @@ const darkTheme = createTheme({
 			main: teal[900],
 		},
 		secondary: {
-			main: blue[500],
+			main: cyan[500],
 		},
 		info: {
-			main: cyan[500],
+			main: blue[500],
 		},
 		alpha: { main: purple[400] },
 		beta: { main: pink[400] },

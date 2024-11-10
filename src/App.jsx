@@ -12,10 +12,10 @@ function App() {
 			<Button
 				variant="outlined"
 				size="small"
-				color="secondary"
+				color="info"
 				onClick={() => setTableVisible(!tableVisible)}
 			>
-				Show Table
+				{tableVisible ? "Hide Table" : "Show Table"}
 			</Button>
 			<div>
 				<Collapse in={tableVisible}>
