@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { Grid2 as Grid, TextField, Button, Typography } from "@mui/material";
 import { Refresh } from "@mui/icons-material";
 import "./App.css";
+import { match2, match3 } from "./App";
 
 export default function Calculator() {
 	const [grid, setGrid] = useState(Array(9).fill(""));
@@ -101,8 +102,8 @@ export default function Calculator() {
 
 		const matchCount = columnValues.filter((v) => v === currentValue).length;
 
-		if (matchCount === 3) return "#90EE90"; //  green
-		if (matchCount === 2) return "#ffe500"; //  yellow
+		if (matchCount === 3) return match3; //  green
+		if (matchCount === 2) return match2; //  yellow
 		return "white";
 	};
 
@@ -141,6 +142,7 @@ export default function Calculator() {
 				onClick={calculateScores}
 				variant="contained"
 				className="kb-calculator__button"
+				size="small"
 			>
 				Calculate Score
 			</Button>

@@ -7,6 +7,7 @@ import {
 	TableRow,
 	Paper,
 } from "@mui/material";
+import { match2, match3 } from "./App";
 export default function ScoreTable() {
 	const rows = [1, 2, 3, 4, 5, 6].map((value) => ({
 		diceValue: value,
@@ -30,8 +31,12 @@ export default function ScoreTable() {
 							<TableCell component="th" scope="row">
 								{row.diceValue}
 							</TableCell>
-							<TableCell align="right">{row.twoMatching}</TableCell>
-							<TableCell align="right">{row.threeMatching}</TableCell>
+							<TableCell align="right" sx={{ color: match2 }}>
+								{row.twoMatching}
+							</TableCell>
+							<TableCell align="right" sx={{ color: match3 }}>
+								{row.threeMatching}
+							</TableCell>
 						</TableRow>
 					))}
 				</TableBody>
