@@ -1,11 +1,5 @@
 import { useState } from "react";
-import {
-	Button,
-	Container,
-	Box,
-	Typography,
-	Grid2 as Grid,
-} from "@mui/material";
+import { Button, Box, Typography } from "@mui/material";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import PersonRemoveIcon from "@mui/icons-material/PersonRemove";
 import GridCalculator from "./Calculator";
@@ -13,66 +7,42 @@ import GridCalculator from "./Calculator";
 export default function KnucklebonesScoreKeeping() {
 	const [showOpponent, setShowOpponent] = useState(false);
 
-	const addOpponentGrid = () => {
-		setShowOpponent(true);
-	};
-	const removeOpponentGrid = () => {
-		setShowOpponent(false);
+	const toggleOpponentGrid = () => {
+		setShowOpponent(!showOpponent);
 	};
 
 	return (
-		<Container maxWidth="lg">
-			<Typography variant="h4" sx={{ mb: 4, textAlign: "center" }}>
-				Knucklebones Game
-			</Typography>
-			<Grid container spacing={4}>
-				<Grid xs={12} md={6}>
-					<Box sx={{ p: 2, border: "1px solid #ccc", borderRadius: 2 }}>
-						<Typography variant="h5" sx={{ mb: 2 }}>
+		<>
+			<Button
+				variant="contained"
+				startIcon={showOpponent ? <PersonRemoveIcon /> : <PersonAddIcon />}
+				onClick={toggleOpponentGrid}
+				size="medium"
+				className="opponent__button"
+			>
+				{showOpponent ? "Remove Opponent Grid" : "Add Opponent Grid"}
+			</Button>
+			<div className="kb-scorekeeping__wrapper">
+				<div className="player__wrapper">
+					<Box className="grid__wrapper">
+						<Typography variant="h6" className="grid__title" align="right">
 							Your Grid
 						</Typography>
 						<GridCalculator />
 					</Box>
-				</Grid>
-				{!showOpponent && (
-					<Grid
-						xs={12}
-						md={6}
-						sx={{
-							display: "flex",
-							alignItems: "center",
-							justifyContent: "center",
-						}}
-					>
-						<Button
-							variant="contained"
-							startIcon={<PersonAddIcon />}
-							onClick={addOpponentGrid}
-							size="large"
-						>
-							Add Opponent Grid
-						</Button>
-					</Grid>
-				)}
-				{showOpponent && (
-					<>
-						<Button
-							variant="contained"
-							startIcon={<PersonRemoveIcon />}
-							onClick={removeOpponentGrid}
-							size="large"
-						>
-							Remove Opponent Grid
-						</Button>
-						<Grid xs={12} md={6}>
-							<Box sx={{ p: 2, border: "1px solid #ccc", borderRadius: 2 }}>
-								<Typography variant="h5">Opponent Grid</Typography>
-								<GridCalculator />
-							</Box>
-						</Grid>
-					</>
-				)}
-			</Grid>
-		</Container>
+				</div>
+
+				<div className="opponent__wrapper">
+					{showOpponent && (
+						<Box className="grid__wrapper">
+							<Typography variant="h6" className="grid__title" align="right">
+								Opponent Grid
+							</Typography>
+							<GridCalculator />
+						</Box>
+					)}
+				</div>
+			</div>
+		</>
 	);
 }

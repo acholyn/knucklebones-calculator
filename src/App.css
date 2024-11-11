@@ -1,5 +1,6 @@
 #root {
 	box-sizing: border-box;
+	width: 100%;
 }
 
 .app-wrapper {
@@ -8,14 +9,49 @@
 	margin-bottom: 4rem;
 }
 
+.kb-scorekeeping__wrapper {
+	display: flex;
+}
+.table__wrapper {
+	margin-bottom: 1.2rem;
+}
+.opponent__button {
+	margin-top: 2.4rem;
+}
+
 .kb-calculator__wrapper {
 	display: grid;
 	justify-items: center;
-	margin-top: 2rem;
 
 	.kb-calculator {
 		justify-content: center;
 		margin-top: 1rem;
 		margin-bottom: 2rem;
+		margin-inline: 8%;
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		grid-template-rows: repeat(3, 1fr);
+
+		.kb-calculator__cell {
+			width: 3rem;
+		}
 	}
+}
+
+.grid__wrapper {
+	border: 2px solid grey;
+	border-radius: 15px;
+
+	.grid__title {
+		color: grey;
+		padding-inline: 1.5rem;
+	}
+}
+
+.opponent__wrapper,
+.player__wrapper {
+	display: grid;
+	margin: 1.4rem 0;
+	width: fit-content;
+	justify-content: center;
 }

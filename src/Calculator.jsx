@@ -1,6 +1,12 @@
 import { useRef, useState } from "react";
-import { Grid2 as Grid, TextField, Button, Typography } from "@mui/material";
-import { Refresh } from "@mui/icons-material";
+import {
+	Grid2 as Grid,
+	TextField,
+	Button,
+	Typography,
+	ButtonGroup,
+} from "@mui/material";
+import { Refresh, Calculate } from "@mui/icons-material";
 import "./App.css";
 import { match2, match3 } from "./App";
 
@@ -109,44 +115,42 @@ export default function Calculator() {
 
 	return (
 		<div className="kb-calculator__wrapper">
-			<Button
-				onClick={() => setGrid(Array(9).fill(""))}
-				variant="outlined"
-				className="kb-calculator__button"
-				color="secondary"
-				size="small"
-				startIcon={<Refresh />}
-			>
-				Reset
-			</Button>
+			<ButtonGroup size="small">
+				<Button
+					onClick={() => setGrid(Array(9).fill(""))}
+					variant="outlined"
+					color="secondary"
+					startIcon={<Refresh />}
+				>
+					Reset
+				</Button>
+				<Button
+					onClick={calculateScores}
+					variant="contained"
+					startIcon={<Calculate />}
+				>
+					Calculate Score
+				</Button>
+			</ButtonGroup>
+			<Typography variant="h6">Total: {total}</Typography>
 			<Grid container spacing={2} className="kb-calculator">
 				{grid.map((value, index) => (
-					<Grid xs={4} key={index}>
-						<TextField
-							size="large"
-							value={value}
-							onChange={(e) => handleInputChange(index, e.target.value)}
-							onKeyDown={(e) => handleKeyDown(e, index)}
-							inputRef={(el) => (inputRefs.current[index] = el)}
-							type="number"
-							sx={{
-								"& .MuiInputBase-input": {
-									color: getTextColor(index),
-								},
-							}}
-						/>
-					</Grid>
+					<TextField
+						className="kb-calculator__cell"
+						key={index}
+						size="large"
+						value={value}
+						onChange={(e) => handleInputChange(index, e.target.value)}
+						onKeyDown={(e) => handleKeyDown(e, index)}
+						inputRef={(el) => (inputRefs.current[index] = el)}
+						sx={{
+							"& .MuiInputBase-input": {
+								color: getTextColor(index),
+							},
+						}}
+					/>
 				))}
 			</Grid>
-			<Button
-				onClick={calculateScores}
-				variant="contained"
-				className="kb-calculator__button"
-				size="small"
-			>
-				Calculate Score
-			</Button>
-			<Typography variant="h6">Total: {total}</Typography>
 		</div>
 	);
 }

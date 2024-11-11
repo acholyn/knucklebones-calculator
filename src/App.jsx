@@ -15,11 +15,12 @@ function App() {
 				variant="outlined"
 				size="small"
 				color="info"
+				className="button--show-table"
 				onClick={() => setTableVisible(!tableVisible)}
 			>
 				{tableVisible ? "Hide Table" : "Show Scoring Table"}
 			</Button>
-			<div>
+			<div className="table__wrapper">
 				<Collapse in={tableVisible}>
 					<ScoreTable />
 				</Collapse>
