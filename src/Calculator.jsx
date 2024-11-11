@@ -13,6 +13,8 @@ import { match2, match3 } from "./App";
 export default function Calculator() {
 	const [grid, setGrid] = useState(Array(9).fill(""));
 	const [scores, setScores] = useState([0, 0, 0]);
+	const [columnTotals, setColumnTotals] = useState([0, 0, 0]);
+
 	const [total, setTotal] = useState(0);
 	const inputRefs = useRef(Array(9).fill(null));
 
@@ -67,6 +69,7 @@ export default function Calculator() {
 
 	const calculateScores = () => {
 		const newScores = [0, 0, 0];
+		const columnTotals = [0, 0, 0];
 
 		for (let col = 0; col < 3; col++) {
 			const columnValues = [grid[col], grid[col + 3], grid[col + 6]].map(
@@ -93,9 +96,12 @@ export default function Calculator() {
 			}
 
 			newScores[col] = columnScore;
+			columnTotals[col] = columnValues.reduce((sum, value) => sum + value, 0);
 		}
 
 		setScores(newScores);
+		setColumnTotals(columnTotals);
+
 		// const totalScore = newScores.reduce((sum, score) => sum + score, 0);
 		// setTotal(totalScore);
 	};
@@ -154,6 +160,16 @@ export default function Calculator() {
 							},
 						}}
 					/>
+				))}
+				{columnTotals.map((total, index) => (
+					<Typography
+						variant="body1"
+						align="center"
+						key={`total-${index}`}
+						color="grey"
+					>
+						{total}
+					</Typography>
 				))}
 			</Grid>
 		</div>
