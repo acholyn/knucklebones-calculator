@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
 	Grid2 as Grid,
 	TextField,
@@ -15,6 +15,11 @@ export default function Calculator() {
 	const [scores, setScores] = useState([0, 0, 0]);
 	const [total, setTotal] = useState(0);
 	const inputRefs = useRef(Array(9).fill(null));
+
+	useEffect(() => {
+		const newTotal = scores.reduce((sum, score) => sum + score, 0);
+		setTotal(newTotal);
+	}, [scores]);
 
 	const handleInputChange = (index, value) => {
 		const newGrid = [...grid];
@@ -91,8 +96,8 @@ export default function Calculator() {
 		}
 
 		setScores(newScores);
-		const totalScore = newScores.reduce((sum, score) => sum + score, 0);
-		setTotal(totalScore);
+		// const totalScore = newScores.reduce((sum, score) => sum + score, 0);
+		// setTotal(totalScore);
 	};
 
 	const getTextColor = (index) => {
