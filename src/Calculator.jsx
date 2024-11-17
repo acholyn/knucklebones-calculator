@@ -67,6 +67,13 @@ export default function Calculator() {
 		}
 	};
 
+	const resetScore = () => {
+		setGrid(Array(9).fill(""));
+		setScores([0, 0, 0]);
+		setColumnTotals([0, 0, 0]);
+		setTotal(0);
+	};
+
 	const calculateScores = () => {
 		const newScores = [0, 0, 0];
 		const columnTotals = [0, 0, 0];
@@ -96,7 +103,7 @@ export default function Calculator() {
 			}
 
 			newScores[col] = columnScore;
-			columnTotals[col] = columnValues.reduce((sum, value) => sum + value, 0);
+			columnTotals[col] = columnScore;
 		}
 
 		setScores(newScores);
@@ -128,7 +135,7 @@ export default function Calculator() {
 		<div className="kb-calculator__wrapper">
 			<ButtonGroup size="small">
 				<Button
-					onClick={() => setGrid(Array(9).fill(""))}
+					onClick={resetScore}
 					variant="outlined"
 					color="secondary"
 					startIcon={<Refresh />}
