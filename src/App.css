@@ -38,6 +38,7 @@
 	}
 }
 
+/* do media query for 400px wide and make grids opposite? or scale them down */
 .grid__wrapper {
 	border: 2px solid grey;
 	border-radius: 15px;
